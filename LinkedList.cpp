@@ -15,13 +15,23 @@ public:
 
 struct LinkedList{
     Node * head;
+    Node * tail;
     LinkedList(){
     }
     void insert(int data);
     void deleteFirst();
     void printList();
-    
+    void updateTail();
 };
+
+void LinkedList::updateTail(){
+    Node * nav = head;
+    while(nav-> next != NULL){
+        nav = nav->next;
+    }
+    tail = nav;
+}
+
 
 void LinkedList::insert(int data){
     if(head == NULL){
@@ -31,6 +41,7 @@ void LinkedList::insert(int data){
     Node * newNode = new Node(data);
     newNode-> next = head;
     head = newNode;
+    updateTail();
     }
 }
 
@@ -45,9 +56,13 @@ void LinkedList::printList(){
 	
    //start from the beginning
    while(ptr != NULL){        
-      cout << ptr->data << ",";
+      cout << ptr->data ;
+      if(ptr != tail){
+          cout << ",";
+      }
       ptr = ptr->next;
    }
+   cout << endl;
 	
 }
 
@@ -64,11 +79,9 @@ int main(){
 
     LL->insert(5);
 
-
     LL->insert(5);
     LL->insert(5);
     LL->deleteFirst();
-
 
     LL->printList();
 }
