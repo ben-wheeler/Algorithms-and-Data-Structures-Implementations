@@ -85,7 +85,6 @@ void LinkedList::printList(){
       ptr = ptr->next;
    }
    cout << endl;
-	
 }
 
 int main(){
