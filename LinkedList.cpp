@@ -18,8 +18,10 @@ struct LinkedList{
     Node * tail;
     LinkedList(){
     }
-    void insert(int data);
+    void insertFirst(int data);
+    void insertLast(int data);
     void deleteFirst();
+    void deleteLast();
     void printList();
     void updateTail();
 };
@@ -32,8 +34,7 @@ void LinkedList::updateTail(){
     tail = nav;
 }
 
-
-void LinkedList::insert(int data){
+void LinkedList::insertFirst(int data){
     if(head == NULL){
         head = new Node(data);
     }
@@ -45,10 +46,31 @@ void LinkedList::insert(int data){
     }
 }
 
+void LinkedList::insertLast(int data){
+    if(head == NULL){
+        head = new Node(data);
+    }
+    else{
+    Node * newNode = new Node(data);
+    tail-> next = newNode;
+    updateTail();
+    }
+}
+
 void LinkedList::deleteFirst(){
     Node * nextNode = head-> next;
     free(head);
     head = nextNode;
+}
+
+void LinkedList::deleteLast(){
+    Node * nav = head;
+    while(nav->next->next != NULL){
+        nav = nav->next;
+    }
+    free(tail);
+    nav->next = NULL;
+    updateTail();
 }
 
 void LinkedList::printList(){
@@ -68,20 +90,16 @@ void LinkedList::printList(){
 
 int main(){
     LinkedList * LL = new LinkedList;
-    LL->insert(3);
-        LL->insert(5);
-
-    LL->insert(5);
-
-    LL->insert(5);
-
-    LL->insert(5);
-
-    LL->insert(5);
-
-    LL->insert(5);
-    LL->insert(5);
+    LL->insertFirst(3);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertFirst(5);
+    LL->insertLast(8);
     LL->deleteFirst();
-
+    LL->deleteLast();
     LL->printList();
 }
