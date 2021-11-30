@@ -16,4 +16,4 @@ A simple example of a stack in C++. Controlable via driver within file. Based on
 - Pop elements off of stack
 - Ability to print stack values.
 
-**Compile and Run using:** `make Stack`
+**Compile and Run using:** `make LLStack`
