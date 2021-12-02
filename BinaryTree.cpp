@@ -20,27 +20,27 @@ public:
     Node(){}
 }; // end class initialisation
 
-struct BinaryTree
+struct BinaryTree // structure for binary tree
 {
-    Node * root;
-    void insert(int value); // helper function to call insertNode or initialise root node
+    Node * root; // root of tree
+    void insert(int value); // helper function to call insertNode or initialise root node to hold first value
     void del(int value); // helper function to delete nodes
     Node * insertNode(Node *current, int value); // actual function for inserting, takes in the current looked at node (starts as root, changes recursively) and value to add
     Node * deleteNode(Node *current, int value); // actual function for deleting, takes in the current looked at node (starts as root, changes recursively) and value to delete
     Node * search(Node *current, int value); // takes in BT root + value looking for 
-    Node * minNodeSubtree(Node *node);
+    Node * minNodeSubtree(Node *node); // function to assist with deleting
 
-    BinaryTree(){
+    BinaryTree(){ // default initaliser, sets root to null
         root = NULL;
     }
 };
 
-void BinaryTree::insert(int x)
+void BinaryTree::insert(int x) // helper function to call insertNode or initialise root node to hold first value
 {
-    if(root == NULL){
-        root = new Node(x);
+    if(root == NULL){ // if root == null (entire tree is empty)
+        root = new Node(x); // root = new node with value
     }
-    else{
+    else{ // creates new node as roots left or right child, calls real insert Node function
     if (x < root->data) // if data is less then current root/branch of the tree
     {
         root->left = insertNode(root->left, x); // recersive call, travels down tree, to left
@@ -52,12 +52,12 @@ void BinaryTree::insert(int x)
 }
 }
 
-    void BinaryTree::del(int value){
-       deleteNode(root, value);
+    void BinaryTree::del(int value){ // helper delete function
+       deleteNode(root, value); // calls real delete function, adds root, to simpfily user's usege of calling function with just value to delete.
     }
 
 
-Node * BinaryTree::insertNode(Node * current, int x){
+Node * BinaryTree::insertNode(Node * current, int x){ // insert function
     if (current == NULL) // base case, standard binary tree
     {
         return new Node(x); // create a new node with data
@@ -77,11 +77,11 @@ Node * BinaryTree::insertNode(Node * current, int x){
     return current; // return unchanged node
 }
 
-
-Node * BinaryTree::search(Node * current, int x){
-    if (current == NULL) // base case, standard binary tree
+up to here
+Node * BinaryTree::search(Node * current, int x){ // search function, returns node address
+    if (current == NULL) // case, node not in tree
     {
-        return NULL; // create a new node with data
+        return NULL; // returns null
     }
 
     else if (current->data == x) // base case, standard binary tree
