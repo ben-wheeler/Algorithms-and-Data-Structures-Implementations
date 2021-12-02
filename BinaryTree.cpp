@@ -25,9 +25,9 @@ struct BinaryTree
     Node * root;
     void insert(int value); // helper function to call insertNode or initialise root node
     void del(int value); // helper function to delete nodes
-    Node * insertNode(Node *current, int value);
-    Node * deleteNode(Node *current, int value);
-    Node * search(Node *current, int value);
+    Node * insertNode(Node *current, int value); // actual function for inserting, takes in the current looked at node (starts as root, changes recursively) and value to add
+    Node * deleteNode(Node *current, int value); // actual function for deleting, takes in the current looked at node (starts as root, changes recursively) and value to delete
+    Node * search(Node *current, int value); // takes in BT root + value looking for 
     Node * minNodeSubtree(Node *node);
 
     BinaryTree(){
