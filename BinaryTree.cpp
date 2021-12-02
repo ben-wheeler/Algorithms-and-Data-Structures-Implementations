@@ -23,8 +23,13 @@ public:
 struct BinaryTree
 {
     Node * root;
-    void insert(int value);
+    void insert(int value); // helper function to call insertNode or initialise root node
+    void del(int value); // helper function to delete nodes
     Node * insertNode(Node *current, int value);
+    Node * deleteNode(Node *current, int value);
+    Node * search(Node *current, int value);
+    Node * minNodeSubtree(Node *node);
+
     BinaryTree(){
         root = NULL;
     }
@@ -47,10 +52,15 @@ void BinaryTree::insert(int x)
 }
 }
 
+    void BinaryTree::del(int value){
+       deleteNode(root, value);
+    }
+
+
 Node * BinaryTree::insertNode(Node * current, int x){
     if (current == NULL) // base case, standard binary tree
     {
-        return new Node(x);; // create a new node with data
+        return new Node(x); // create a new node with data
     }
     if (x < current->data) // if data is less then current root/branch of the tree
     {
@@ -62,7 +72,84 @@ Node * BinaryTree::insertNode(Node * current, int x){
     }
     else
     {                // if == existing
-        return current; // return node
+    return current; // return node
+    }
+    return current; // return unchanged node
+}
+
+
+Node * BinaryTree::search(Node * current, int x){
+    if (current == NULL) // base case, standard binary tree
+    {
+        return NULL; // create a new node with data
+    }
+
+    else if (current->data == x) // base case, standard binary tree
+    {
+        return current; // create a new node with data
+    }
+    else if (x < current->data) // if data is less then current root/branch of the tree
+    {
+        search(current->left, x); // recersive call, travels down tree, to left
+    }
+    else if (x > current->data) // if data is greator then current root/branch of the tree
+    {
+    search(current->right, x); // recersive call, travels down tree, to right
+    }
+    return current; // return unchanged node
+}
+
+Node * BinaryTree::minNodeSubtree(Node *node) // function for finding max node of a subtree
+{
+    Node *current = node; // creates temp node
+
+    while (current->left != NULL)
+    { // keeps travelling down tree, while next right != NULL
+        current = current->left;
+    }
+    return current; // returns location of max node of a subtree
+}
+
+Node * BinaryTree::deleteNode(Node * current, int x){
+    if (current == NULL) // base case, standard binary tree
+    {
+        return current; // create a new node with data
+    }
+    if (x < current->data) // if data is less then current root/branch of the tree
+    {
+        current->left = deleteNode(current->left, x); // recersive call, travels down tree, to left
+    }
+    else if (x > current->data) // if data is greator then current root/branch of the tree
+    {
+        current->right = deleteNode(current->right, x); // recersive call, travels down tree, to right
+    }
+    else
+    {
+        if ((current->left == NULL) || (current->right == NULL)) // if there is one or no child
+        {
+            Node *temp; // inisitalise temparory node
+            if (current->left != NULL)
+            {                      // if left child exists
+                temp = current->left; // temp = left child
+            }
+            else
+            {                       // if no left child
+                temp = current->right; // temp equals right child
+            }
+            // No child, ie, both = NULL;
+            if (temp == NULL)
+            {
+                current = NULL; // current node = nothing (deletes data)
+            }
+            else             // Right/Left != Null, therefore one child case
+                current = temp; // if there was child, node = child (deletes data)
+        }
+        else // if two children
+        {
+            Node *temp = minNodeSubtree(current->right);         // temp node equals max value from left child's subtree
+            current->data = temp->data;                         // node's data = max value from left child's subtree
+            current->right = deleteNode(current->right, temp->data); // left child = recursive call to delete nax value;
+        }
     }
     return current; // return unchanged node
 }
@@ -82,10 +169,11 @@ int main()
     BinaryTree *BT = new BinaryTree();
     BT->insert(5);
     BT->insert(3);
-
     BT->insert(2);
-
     BT->insert(7);
     BT->insert(6);
-    preOrder(BT->root);
+    BT->del(5);
+    
+    cout << BT->search(BT->root,11) << endl;
+        preOrder(BT->root);
 }
