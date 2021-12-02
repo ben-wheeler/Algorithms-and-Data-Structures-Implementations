@@ -26,3 +26,14 @@ A simple example of a queue in C++. Controlable via main driver within file. Bas
 - Ability to print queue values.
 
 **Compile and Run using:** `make Queue`
+
+## Binary Tree
+A simple example of a Binary Tree in C++. 
+WIP DESCRIPTION
+<!-- Controlable via main driver within file. Based on LinkedList.
+#### Features:
+- Queue elements at back of the queue 
+- Enqueue elements from front of the queue
+- Ability to print queue values. -->
+
+**Compile and Run using:** `make BinaryTree`
