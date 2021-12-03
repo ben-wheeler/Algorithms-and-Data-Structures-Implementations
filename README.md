@@ -28,12 +28,11 @@ A simple example of a queue in C++. Controlable via main driver within file. Bas
 **Compile and Run using:** `make Queue`
 
 ## Binary Tree
-A simple example of a Binary Tree in C++. 
-WIP DESCRIPTION
-<!-- Controlable via main driver within file. Based on LinkedList.
+A simple example of a Binary Tree in C++. Controlable via main driver within file.
 #### Features:
-- Queue elements at back of the queue 
-- Enqueue elements from front of the queue
-- Ability to print queue values. -->
+- Insert elements using `Binary Tree Name->insert(<int>)`
+- Delete elements using `Binary Tree Name->insert(<int>)`
+- Search elements using `Binary Tree Name->insert(<binary tree root node pointer>,<int>)`
+- Print tree using `preOrder(<binary tree root node pointer>)`
 
 **Compile and Run using:** `make BinaryTree`
