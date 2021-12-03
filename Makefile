@@ -6,6 +6,6 @@ FILOStack: Stack.cpp
 
 Queue: Queue.cpp
 	g++ Queue.cpp -o run; ./run
-
+	
 BinaryTree: BinaryTree.cpp
 	g++ BinaryTree.cpp -o run; ./run
