@@ -9,3 +9,6 @@ Queue: Queue.cpp
 	
 BinaryTree: BinaryTree.cpp
 	g++ BinaryTree.cpp -o run; ./run
+
+AdjacencyList: AdjacencyList.cpp
+	g++ AdjacencyList.cpp -o run; ./run
