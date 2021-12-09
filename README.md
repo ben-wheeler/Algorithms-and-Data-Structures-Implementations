@@ -39,3 +39,16 @@ A simple example of a Binary Tree in C++. Controlable via main driver within fil
 - Print tree using `preOrder(<binary tree root node pointer>)`
 
 **Compile and Run using:** `make BinaryTree`
+
+
+## Binary Tree
+WIP Single Direction AdjacencyList
+<!-- A simple example of a Binary Tree in C++. Controlable via main driver within file. -->
+#### Features:
+<!-- - Insert elements using `Binary Tree Name->insert(<int>)`
+- Delete elements using `Binary Tree Name->insert(<int>)`
+- Search elements using `Binary Tree Name->insert(<binary tree root node pointer>,<int>)`
+- Print tree using `preOrder(<binary tree root node pointer>)` -->
+
+**Compile and Run using:** `make AdjacenyList`
+
