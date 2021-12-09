@@ -1,7 +1,4 @@
 #include <iostream>
-#include <vector>
-
-#define MAXV 1000 // the max number of vertices
 
 using namespace std;
 
@@ -11,136 +8,75 @@ class Node
 public:
     int vertex; // the adjacency info of each node
     Node *next; // pointer to next node in list
+};              // end class initialisation
 
-    // constructor of new nodes
-    Node()
-    {
-        next == NULL;
-    }
-}; // end class initialisation
-
-// structure for linked list declaration
-struct AdjacencyList
+// adjacency list for each vertex with head as Node type
+class AdjacencyList
 {
-    vector<Node *> verticies;
-    int numVerticies;
-    AdjacencyList()
-    {
-    }
-    // functions for controlling linkedList
-    void addVertex(int x); // inserting at start of list
-    void printList();      // prints entire list
-    bool sortHelper()
-    {
-    }
-    // void insertLast(int data); // inserting at end of list
-    // void deleteFirst(); // deleting / removing first value in list
-    // void deleteLast(); // deleting / removing last value in list
-    // void updateTail(); // refactored function to simplfy layout of code, responsible for ensuring tail is correct
+public:
+    Node *head;
 };
 
-// refactored function to simplfy layout of code, responsible for ensuring tail is correct
-// void AdjacencyList::updateTail(){
-//     Node * nav = head; // creates temp pointer called nav to head
-//     while(nav-> next != NULL){ // nav navigates the list while it's next pointer is not NULL
-//         nav = nav->next; // nav moves to next item in list
-//     }
-//     tail = nav; // when nav->next == NULL, loop above stops, therefore at last item, which gets set as tail
-// }
-
-// inserting at start of list
-void AdjacencyList::addVertex(int x)
+// actual Graph
+class Graph
 {
-    Node *temp = new Node;
-    temp->vertex = x;
-    verticies.push_back(temp);
-
-    numVerticies = verticies.size();
-    if (numVerticies == 0)
+public:
+    int v;
+    AdjacencyList *list;
+    Graph(int n) // default initialiser
     {
-        return;
+        this->v = n;
+        list = new AdjacencyList[this->v];
+        for (int i = 0; i < this->v; i++)
+        {
+            list[i].head = nullptr;
+        }
+    }
+    void addEdge(int x, int y);
+    void print();
+};
+
+void Graph::addEdge(int x, int y)
+{
+    Node *nd = new Node();
+    nd->vertex = y;
+    nd->next = nullptr;
+    if (list[x].head == nullptr)
+    {
+        list[x].head = nd;
     }
     else
     {
-        verticies[numVerticies]->next = temp;
-    }
-}
-
-// // inserting at end of list
-// void AdjacencyList::insertLast(int data){ //
-//     if(head == NULL){ // if head currently does not exist
-//         head = new Node(data); // create head with data
-//         tail = head; // head and tail both equal same node, as it is only one currently in list
-//     }
-//     else{ // if head already exists
-//     Node * newNode = new Node(data); // create newNode
-//     tail-> next = newNode; // set tail (last) nodes next to be equal to new node
-//     updateTail(); // call to update tail, will become new node
-//     }
-// }
-
-// // deleting / removing first value in list
-// void AdjacencyList::deleteFirst(){
-//     Node * nextNode = head-> next; // create pointer to new node, equal to 2nd value in list
-//     free(head); // delete first
-//     head = nextNode; // move head to be equal to the old 2nd value, as located by pointer
-// }
-
-// // deleting / removing last value in list
-// void AdjacencyList::deleteLast(){
-//     Node * nav = head; // pointer for traversing linked list
-//     while(nav->next->next != NULL){ // while loop to navigate up till the 2nd to last node
-//         nav = nav->next;
-//     }
-//     free(tail); // free the current tail
-//     nav->next = NULL; // set new last node's next to be NULL
-//     updateTail(); // updates last node to be tail
-// }
-
-// for printing linked list values
-void AdjacencyList::printList()
-{
-    // Node *temp;
-    // for (int i = 0; i < nvertices; i++)
-    // {
-    //     cout << i << ": ";
-    //     temp = edges[i];
-    //     while (temp != NULL)
-    //     {
-    //         cout << " " << temp->y;
-    //         temp = temp->next;
-    //     }
-    //     cout << endl;
-    // }
-}
-
-void printGraph(AdjacencyList * adj, int V)
-{
-    for (int i = 0; i < V; i++)
-    {
-        cout << "\n Vertex " << i << ":";
-        Node * temp = adj->verticies[i];
-        while(temp != NULL)
+        Node *h = list[x].head;
+        while (h->next != nullptr)
         {
-            cout << "-> " << temp->vertex;
-            temp = temp->next;
+            h = h->next;
         }
-        printf("\n");
+        h->next = nd;
     }
 }
 
-int main() // driver with example operations
+void Graph::print()
 {
-    AdjacencyList *AL = new AdjacencyList; // initialising LinkedList
-    // examples of manipulating linked list
-    AL->addVertex(1);
-    AL->addVertex(2);
-    AL->addVertex(3);
-    // AL->insertEdge(5);
-    // AL->insertEdge(5);
-    // AL->insertEdge(5);
-    // AL->insertEdge(5);
-    // AL->insertEdge(5);
-    // printing linked list
-    printGraph(AL, AL->numVerticies);
+    for (int i = 0; i < this->v; i++)
+    {
+        Node *h = list[i].head;
+        cout << i << "->";
+        while (h != nullptr)
+        {
+            cout << h->vertex << " ";
+            h = h->next;
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    Graph g(4); // 4 is number of vertex in the Graph
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(2, 3);
+    g.addEdge(1, 3);
+    g.print();
 }
