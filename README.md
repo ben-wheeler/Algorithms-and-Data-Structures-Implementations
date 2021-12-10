@@ -42,7 +42,6 @@ A simple example of a Binary Tree in C++. Controlable via main driver within fil
 
 
 ## Adjacency List 
-WIP Single Direction Adjacency List 
 A simple example of an Adjacency List in C++. Controlable via main driver within file.
 #### Features:
 - Initalalise Tree to have x vertex elements using `->Graph * <Adjacency List Name> = new Graph(x);`
@@ -50,4 +49,3 @@ A simple example of an Adjacency List in C++. Controlable via main driver within
 - Print graph using `<Adjacency List Name>->print()`
 
 **Compile and Run using:** `make AdjacenyList`
-
