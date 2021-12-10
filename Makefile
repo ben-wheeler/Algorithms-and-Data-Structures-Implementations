@@ -12,3 +12,6 @@ BinaryTree: BinaryTree.cpp
 
 AdjacencyList: AdjacencyList.cpp
 	g++ AdjacencyList.cpp -o run; ./run
+
+BreadthFirstSearch: BreadthFirstSearch.cpp
+	g++ BreadthFirstSearch.cpp -o run; ./run
