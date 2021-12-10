@@ -3,18 +3,18 @@
 using namespace std;
 
 // class for Nodes
-class Node
+class EdgeNode
 {
 public:
     int vertex; // the adjacency info of each node
-    Node *next; // pointer to next node in list
+    EdgeNode *next; // pointer to next node in list
 };              // end class initialisation
 
-// adjacency list for each vertex with head as Node type
+// adjacency list for each vertex with head as EdgeNode type
 class AdjacencyList
 {
 public:
-    Node *head; // Head Node for AdjacencyList vertex
+    EdgeNode *head; // Head EdgeNode for AdjacencyList vertex
 };
 
 // actual Graph
@@ -40,7 +40,7 @@ public:
 
 void Graph::addEdge(int from, int to)
 {
-    Node *newNode = new Node();     // creates new instance of node
+    EdgeNode *newNode = new EdgeNode();     // creates new instance of node
     newNode->vertex = to;           // creates a new node, whos vertex is the final destination of the edge (to)
     newNode->next = nullptr;        // sets the "next" pointer to point to nothing
     if (list[from].head == nullptr) // if "from" AdjacencyList head node currently has no edges
@@ -49,7 +49,7 @@ void Graph::addEdge(int from, int to)
     }
     else // if "from" AdjacencyList head node currently has edges
     {
-        Node *temp = list[from].head; // create a new pointer
+        EdgeNode *temp = list[from].head; // create a new pointer
         while (temp->next != nullptr)
         {
             temp = temp->next; // traverse tree with temp pointer
@@ -62,7 +62,7 @@ void Graph::print() // function used to print graph
 {
     for (int i = 0; i < this->nVerticies; i++) // loop through each vertex
     {
-        Node *temp = list[i].head; // temp pointer to transverse tree
+        EdgeNode *temp = list[i].head; // temp pointer to transverse tree
         cout << i << " -> ";       // output vertex number
         while (temp != nullptr)    // loop to transverse edges
         {
