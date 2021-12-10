@@ -115,7 +115,7 @@ public:
 
     //graph / adjacencyList controls:
     void addEdge(int from, int to); // adds edge to graph
-    void BFS();
+    void BFS(int startAt);
     void print();                   // prints out adjacency list
 };
 
@@ -158,40 +158,39 @@ void Graph::print() // function used to print graph
     }
 }
 
-void Graph::BFS(){
-    
-}
+void Graph::BFS(int startAt){
+    for(int i = 0; i < nVerticies; i++){ // when calling, ensure all visited vector is set to false
+        visited[i] = false;
+    }
+    Queue * Q = new Queue; // initialising a queue
+    visited[startAt] = true; 
+    Q->joinQueue(startAt);
 
-void testQueue(){ // driver with example operations
-    Queue * Q = new Queue; // initialising queue
-    
-    // examples of manipulating queue
-    Q->joinQueue(3);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(5);
-    Q->joinQueue(8);
-    Q->enqueue();
-
-    // printing queue
-    Q->printQueue();
+    while (!Q->isEmpty())
+    {
+        startAt = Q->head->data;
+        cout << startAt;
+        Q->enqueue();
+        for (int i = startAt; i < nVerticies; i++)
+        {
+            if (!visited[i])
+            {
+                visited[i] = true;
+                Q->joinQueue(i);
+            }
+        }
+    }
 }
 
 int main() // funtion driver
 {
     Graph *AL = new Graph(4); // initialising AdjacenyList with 4 Vertex's
-    AL->addEdge(0, 1);        // add edges between 0 and 1
+    AL->addEdge(0, 1);
+    AL->addEdge(0, 2);
     AL->addEdge(1, 2);
+    AL->addEdge(2, 0);
     AL->addEdge(2, 3);
-    AL->addEdge(1, 3);
-    AL->addEdge(3, 1);
-    AL->addEdge(3, 2);
+    AL->addEdge(3, 3);
 
-    AL->print(); // print out adjacency list
-    cout << "------" << endl;
-    testQueue();
+    AL->BFS(2); // print out adjacency list
 }
