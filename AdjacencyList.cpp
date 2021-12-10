@@ -21,28 +21,28 @@ public:
 class Graph
 {
 public:
-    int nVerticies; // number of Vertex's in graph
-    AdjacencyList *list; // the actual adjacency list, consisting of AdjacencyList class, and therefore Nodes 
-    Graph(int num) // default initialiser
+    int nVerticies;      // number of Vertex's in graph
+    AdjacencyList *list; // the actual adjacency list, consisting of AdjacencyList class, and therefore Nodes
+    Graph(int num)       // default initialiser
     {
-        nVerticies = num; // set the number of verticies equal to the number being initialised too
+        nVerticies = num;                     // set the number of verticies equal to the number being initialised too
         list = new AdjacencyList[nVerticies]; // sets the list equal to a new List, with current number of verticies
-        for (int i = 0; i < nVerticies; i++) // going through each item in AdjacencyList
+        for (int i = 0; i < nVerticies; i++)  // going through each item in AdjacencyList
         {
             list[i].head = nullptr; // sets the head of each AdjacencyList item to be equal to NULL, as they contain no values
         }
     }
-    
+
     //graph / adjacencyList controls:
     void addEdge(int from, int to); // adds edge to graph
-    void print(); // prints out adjacency list
+    void print();                   // prints out adjacency list
 };
 
 void Graph::addEdge(int from, int to)
 {
-    Node *newNode = new Node(); // creates new instance of node
-    newNode->vertex = to; // creates a new node, whos vertex is the final destination of the edge (to)
-    newNode->next = nullptr; // sets the "next" pointer to point to nothing
+    Node *newNode = new Node();     // creates new instance of node
+    newNode->vertex = to;           // creates a new node, whos vertex is the final destination of the edge (to)
+    newNode->next = nullptr;        // sets the "next" pointer to point to nothing
     if (list[from].head == nullptr) // if "from" AdjacencyList head node currently has no edges
     {
         list[from].head = newNode; // "head" (first edge) of vertex = the new node
@@ -63,11 +63,12 @@ void Graph::print() // function used to print graph
     for (int i = 0; i < this->nVerticies; i++) // loop through each vertex
     {
         Node *temp = list[i].head; // temp pointer to transverse tree
-        cout << i << " -> "; // output vertex number
-        while (temp != nullptr) // loop to transverse edges
+        cout << i << " -> ";       // output vertex number
+        while (temp != nullptr)    // loop to transverse edges
         {
             cout << temp->vertex; // print out edge connecting value
-            if(temp->next != nullptr){ // for all but last
+            if (temp->next != nullptr)
+            {                 // for all but last
                 cout << ", "; // print  comma between
             }
             temp = temp->next; // move to next
@@ -76,10 +77,10 @@ void Graph::print() // function used to print graph
     }
 }
 
-int main()
+int main() // funtion driver
 {
     Graph *AL = new Graph(4); // initialising AdjacenyList with 4 Vertex's
-    AL->addEdge(0, 1); // add edges between 0 and 1
+    AL->addEdge(0, 1);        // add edges between 0 and 1
     AL->addEdge(1, 2);
     AL->addEdge(2, 3);
     AL->addEdge(1, 3);
