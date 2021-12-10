@@ -41,47 +41,50 @@ public:
 void Graph::addEdge(int from, int to)
 {
     Node *newNode = new Node(); // creates new instance of node
-    newNode->vertex = to; // sets vertex node is pointing to, to the value of to
+    newNode->vertex = to; // creates a new node, whos vertex is the final destination of the edge (to)
     newNode->next = nullptr; // sets the "next" pointer to point to nothing
     if (list[from].head == nullptr) // if "from" AdjacencyList head node currently has no edges
     {
-        list[from].head = newNode; // "head" (first edge) = the new node (edge)
+        list[from].head = newNode; // "head" (first edge) of vertex = the new node
     }
     else // if "from" AdjacencyList head node currently has edges
     {
-        Node *temp = list[from].head;
+        Node *temp = list[from].head; // create a new pointer
         while (temp->next != nullptr)
         {
-            temp = temp->next;
+            temp = temp->next; // traverse tree with temp pointer
         }
-        temp->next = newNode;
+        temp->next = newNode; // at final location, set next equal to the new pointer
     }
 }
 
-void Graph::print()
+void Graph::print() // function used to print graph
 {
-    for (int i = 0; i < this->nVerticies; i++)
+    for (int i = 0; i < this->nVerticies; i++) // loop through each vertex
     {
-        Node *temp = list[i].head;
-        cout << i << " -> ";
-        while (temp != nullptr)
+        Node *temp = list[i].head; // temp pointer to transverse tree
+        cout << i << " -> "; // output vertex number
+        while (temp != nullptr) // loop to transverse edges
         {
-            cout << temp->vertex;
-            if(temp->next != nullptr){
-                cout << ", ";
+            cout << temp->vertex; // print out edge connecting value
+            if(temp->next != nullptr){ // for all but last
+                cout << ", "; // print  comma between
             }
-            temp = temp->next;
+            temp = temp->next; // move to next
         }
-        cout << endl;
+        cout << endl; // at end of current vertix edges being printed, print new line
     }
 }
 
 int main()
 {
-    Graph *AL = new Graph(4); // initialising LinkedList
-    AL->addEdge(0, 1);
+    Graph *AL = new Graph(4); // initialising AdjacenyList with 4 Vertex's
+    AL->addEdge(0, 1); // add edges between 0 and 1
     AL->addEdge(1, 2);
     AL->addEdge(2, 3);
     AL->addEdge(1, 3);
-    AL->print();
+    AL->addEdge(3, 1);
+    AL->addEdge(3, 2);
+
+    AL->print(); // print out adjacency list
 }
