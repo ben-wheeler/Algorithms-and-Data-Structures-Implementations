@@ -41,14 +41,13 @@ A simple example of a Binary Tree in C++. Controlable via main driver within fil
 **Compile and Run using:** `make BinaryTree`
 
 
-## Binary Tree
-WIP Single Direction AdjacencyList
-<!-- A simple example of a Binary Tree in C++. Controlable via main driver within file. -->
+## Adjacency List 
+WIP Single Direction Adjacency List 
+A simple example of an Adjacency List in C++. Controlable via main driver within file.
 #### Features:
-<!-- - Insert elements using `Binary Tree Name->insert(<int>)`
-- Delete elements using `Binary Tree Name->insert(<int>)`
-- Search elements using `Binary Tree Name->insert(<binary tree root node pointer>,<int>)`
-- Print tree using `preOrder(<binary tree root node pointer>)` -->
+- Initalalise Tree to have x vertex elements using `->Graph * <Adjacency List Name> = new Graph(x);`
+- Add elements to tree using `<Adjacency List Name>->addEdge(from, to);`
+- Print graph using `<Adjacency List Name>->print()`
 
 **Compile and Run using:** `make AdjacenyList`
 
