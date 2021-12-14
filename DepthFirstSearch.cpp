@@ -37,7 +37,7 @@ public:
     //graph / adjacencyList controls:
     void addEdge(int from, int to); // adds edge to graph
     void print();                   // prints out adjacency list
-    void BFS(int currentV);         // BreadthFirstSearch function, prints values
+    void DFS(int currentV);         // BreadthFirstSearch function, prints values
 };
 
 void Graph::addEdge(int from, int to)
@@ -79,7 +79,7 @@ void Graph::print() // function used to print graph
     }
 }
 
-void Graph::BFS(int currentV) // BreadthFirstSearch function
+void Graph::DFS(int currentV) // BreadthFirstSearch function
 {
     vector<bool> visited; // creating a vector to track what nodes are vistited
     for (int i = 0; i < nVerticies; i++)
@@ -126,5 +126,5 @@ int main() // funtion driver
     AL->addEdge(2, 3);
     AL->addEdge(3, 3);
 
-    AL->BFS(2); // print out adjacency list using BreadthFirstSearch, starting at array 2
+    AL->DFS(2); // print out adjacency list using BreadthFirstSearch, starting at array 2
 }
