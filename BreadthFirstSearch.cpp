@@ -120,11 +120,11 @@ int main() // funtion driver
 {
     Graph *AL = new Graph(4); // initialising AdjacenyList with 4 Vertex's
     AL->addEdge(0, 1);        // add edges between 0 and 1
-    AL->addEdge(0, 2);
     AL->addEdge(1, 2);
-    AL->addEdge(2, 0);
     AL->addEdge(2, 3);
-    AL->addEdge(3, 3);
+    AL->addEdge(1, 3);
+    AL->addEdge(3, 1);
+    AL->addEdge(3, 2);
 
     AL->DFS(2); // print out adjacency list using BreadthFirstSearch, starting at array 2
 }
