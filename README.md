@@ -51,11 +51,12 @@ A simple example of an Adjacency List in C++. Controlable via main driver within
 **Compile and Run using:** `make AdjacenyList`
 
 ## Breadth First Search
-A simple example of an Breadth First Search in C++. Controlable via main driver within file.
-WIP NOT CURRENTLY WORKING
-<!-- #### Features:
+A simple example of an Breadth First Search in C++. Controlable via main driver within file. Based of Adjaceny List code.
+#### Features:
+- Traverse Tree using `Adjacency List Name>->BFS(vertex to start at)`
+- Edit Graph / Adjacency List using Adjacency List controls:
 - Initalalise Tree to have x vertex elements using `->Graph * <Adjacency List Name> = new Graph(x);`
 - Add elements to tree using `<Adjacency List Name>->addEdge(from, to);`
 - Print graph using `<Adjacency List Name>->print()`
 
-**Compile and Run using:** `make AdjacenyList` -->
+**Compile and Run using:** `make BreadthFirstSearch`
