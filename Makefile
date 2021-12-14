@@ -15,3 +15,6 @@ AdjacencyList: AdjacencyList.cpp
 
 BreadthFirstSearch: BreadthFirstSearch.cpp
 	g++ BreadthFirstSearch.cpp -o run; ./run
+
+DepthFirstSearch: DepthFirstSearch.cpp
+	g++ DepthFirstSearch.cpp -o run; ./run
