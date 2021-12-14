@@ -22,15 +22,17 @@ public:
 class Graph
 {
 public:
-    int nVerticies;      // number of Vertex's in graph
-    AdjacencyList *list; // the actual adjacency list, consisting of AdjacencyList class, and therefore Nodes
-    Graph(int num)       // default initialiser
+    int nVerticies;       // number of Vertex's in graph
+    AdjacencyList *list;  // the actual adjacency list, consisting of AdjacencyList class, and therefore Nodes
+    vector<bool> visited; // vector used later to track if visited for DFS
+    Graph(int num)        // default initialiser
     {
         nVerticies = num;                     // set the number of verticies equal to the number being initialised too
         list = new AdjacencyList[nVerticies]; // sets the list equal to a new List, with current number of verticies
         for (int i = 0; i < nVerticies; i++)  // going through each item in AdjacencyList
         {
             list[i].head = nullptr; // sets the head of each AdjacencyList item to be equal to NULL, as they contain no values
+            visited.push_back(false);
         }
     }
 
@@ -38,6 +40,7 @@ public:
     void addEdge(int from, int to); // adds edge to graph
     void print();                   // prints out adjacency list
     void DFS(int currentV);         // BreadthFirstSearch function, prints values
+    void resetVisited();            // reset visitedArray
 };
 
 void Graph::addEdge(int from, int to)
@@ -79,39 +82,31 @@ void Graph::print() // function used to print graph
     }
 }
 
+void Graph::resetVisited() // reset visitedArray
+{
+    for (int i = 0; i < visited.size(); i++)
+    {
+        visited[i] = false;
+    }
+}
+
 void Graph::DFS(int currentV) // BreadthFirstSearch function
 {
-    vector<bool> visited; // creating a vector to track what nodes are vistited
-    for (int i = 0; i < nVerticies; i++)
+    visited[currentV] = true; // set currently looked at vertex / node to be looked at (true)
+    cout << currentV << " ";
+
+    EdgeNode *temp = list[currentV].head; // temp pointer to transverse adjacencyList for vertex
+    int i = temp->vertex;                 // iterator counter set equal to the first vertix
+    while (temp != nullptr)               // loop to transverse all connected vertexes
     {
-        visited.push_back(false); // initialise to zero
-    }
-
-    vector<int> queue; // create a vector to act as queue
-
-    visited[currentV] = true;  // set currently looked at vertex / node to be looked at (true)
-    queue.push_back(currentV); // add it to the end (in this case the start) of the empty queue
-
-    while (!queue.empty()) // while the queue is not empty,  Breadth First Search
-    {
-        currentV = queue.front();   // the current vertex equals the start of the queue
-        cout << currentV << " ";    // print out the vertex
-        queue.erase(queue.begin()); // remove from queue
-
-        EdgeNode *temp = list[currentV].head; // temp pointer to transverse adjacencyList for vertex
-        int i = temp->vertex;                 // iterator counter set equal to the first vertix
-        while (temp != nullptr)               // loop to transverse all connected vertexes
+        if (!visited[i]) // if haven't yet visited
         {
-            if (!visited[i]) // if haven't yet visited
-            {
-                visited[i] = true;  // mark vertex as visited
-                queue.push_back(i); // push back vertex to end of queue
-            }
-            temp = temp->next;   // move to next item in adjacency list
-            if (temp != nullptr) // if not at end
-            {
-                i = temp->vertex; // set i to be the next value in adjacency lsit
-            }
+            DFS(i); // recursive call to search next vertexes
+        }
+        temp = temp->next;   // move to next item in adjacency list
+        if (temp != nullptr) // if not at end
+        {
+            i = temp->vertex; // set i to be the next value in adjacency lsit
         }
     }
 }
@@ -120,11 +115,13 @@ int main() // funtion driver
 {
     Graph *AL = new Graph(4); // initialising AdjacenyList with 4 Vertex's
     AL->addEdge(0, 1);        // add edges between 0 and 1
-    AL->addEdge(0, 2);
     AL->addEdge(1, 2);
-    AL->addEdge(2, 0);
     AL->addEdge(2, 3);
-    AL->addEdge(3, 3);
+    AL->addEdge(1, 3);
+    AL->addEdge(3, 1);
+    AL->addEdge(3, 2);
 
     AL->DFS(2); // print out adjacency list using BreadthFirstSearch, starting at array 2
+    AL->resetVisited(); // called to reset the visited bools
+
 }
