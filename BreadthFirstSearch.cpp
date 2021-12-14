@@ -3,15 +3,6 @@
 
 using namespace std;
 
-void printVec(vector<int> input)
-{
-    for (int i = 0; i < input.size(); i++)
-    {
-        cout << input[i] << ",";
-    }
-    cout << "end of q" << endl;
-}
-
 // class for Nodes
 class EdgeNode
 {
@@ -46,7 +37,7 @@ public:
     //graph / adjacencyList controls:
     void addEdge(int from, int to); // adds edge to graph
     void print();                   // prints out adjacency list
-    void BFS(int currentV);
+    void BFS(int currentV);         // BreadthFirstSearch function, prints values
 };
 
 void Graph::addEdge(int from, int to)
@@ -88,38 +79,38 @@ void Graph::print() // function used to print graph
     }
 }
 
-void Graph::BFS(int currentV)
+void Graph::BFS(int currentV) // BreadthFirstSearch function
 {
-    vector<bool> visited;
+    vector<bool> visited; // creating a vector to track what nodes are vistited
     for (int i = 0; i < nVerticies; i++)
     {
-        visited.push_back(false);
+        visited.push_back(false); // initialise to zero
     }
 
-    vector<int> queue;
+    vector<int> queue; // create a vector to act as queue
 
-    visited[currentV] = true;
-    queue.push_back(currentV);
+    visited[currentV] = true;  // set currently looked at vertex / node to be looked at (true)
+    queue.push_back(currentV); // add it to the end (in this case the start) of the empty queue
 
-    while (!queue.empty())
+    while (!queue.empty()) // while the queue is not empty,  Breadth First Search
     {
-        currentV = queue.front();
-        cout << currentV << " ";
-        queue.erase(queue.begin());
+        currentV = queue.front();   // the current vertex equals the start of the queue
+        cout << currentV << " ";    // print out the vertex
+        queue.erase(queue.begin()); // remove from queue
 
-        EdgeNode *temp = list[currentV].head; // temp pointer to transverse tree
-        int i = temp->vertex;
-        while (temp != nullptr) // loop to transverse edges
+        EdgeNode *temp = list[currentV].head; // temp pointer to transverse adjacencyList for vertex
+        int i = temp->vertex;                 // iterator counter set equal to the first vertix
+        while (temp != nullptr)               // loop to transverse all connected vertexes
         {
-            if (!visited[i])
+            if (!visited[i]) // if haven't yet visited
             {
-                visited[i] = true;
-                queue.push_back(i);
+                visited[i] = true;  // mark vertex as visited
+                queue.push_back(i); // push back vertex to end of queue
             }
-            temp = temp->next; // move to next
-            if (temp != nullptr)
+            temp = temp->next;   // move to next item in adjacency list
+            if (temp != nullptr) // if not at end
             {
-                i = temp->vertex;
+                i = temp->vertex; // set i to be the next value in adjacency lsit
             }
         }
     }
@@ -135,6 +126,5 @@ int main() // funtion driver
     AL->addEdge(2, 3);
     AL->addEdge(3, 3);
 
-    AL->BFS(2); // print out adjacency list
-    // AL->print();
+    AL->BFS(2); // print out adjacency list using BreadthFirstSearch, starting at array 2
 }
